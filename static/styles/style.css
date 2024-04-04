@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 2vw; /* Use viewport width for padding */
+    background: linear-gradient(90deg, #000000, #ff0039, #f9a11e); /* Gradient using black, red, and yellow */
+    color: #ffffff; /* White text */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw; /* Use viewport width for gap */
+    font-size: 2vw; /* Use viewport width for font size */
+    text-align: center;
+    justify-content: flex-start;
+    margin-top: 10vh;
+}
+
+
+p {
+    
+    text-align: center;
+    margin: 0 auto;
+}
+/* Default link style */
+a {
+    color: whitesmoke; /* Default color for links */
+    text-decoration: underline; /* Remove underline */
+}
+
+/* Visited link style */
+a:visited {
+    color: whitesmoke; /* Color for visited links */
+}
+
+/* Style for buttons */
+button {
+    font-size: 1.5vw; /* Use viewport width for font size */
+    padding: 1vw 2vw; /* Use viewport width for padding */
+    border-radius: 5px; /* Adjust the border radius as needed */
+    margin-right: 2vw; /* Use viewport width for margin */
+}
+
+input {
+    font-size: 1.5vw; /* Use viewport width for font size */
+    padding: 1vw; /* Use viewport width for padding */
+    border-radius: 5px; /* Adjust the border radius as needed */
+}
+
+/* Additional styles for button container */
+.button-container {
+    display: flex;
+}
+
+/* Adjustments for columns */
+.column {
+    float: left;
+    width: 50%;
+    padding: 0 20px; /* Add padding to the columns for spacing */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+ul {
+    list-style-type: none; /* Remove default bullet points */
+}
+
+h3 {
+    margin-top: 20px; /* Add margin above each heading */
+}
+
+/* Clear floats */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Default styles for video */
+video {
+    width: 70%; /* Set the video width to 100% of its container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Media query for mobile devices in vertical mode */
+@media screen and (max-width: 480px) and (orientation: portrait) {
+    /* Adjust the size of the video for mobile devices in vertical mode */
+    video {
+        width: 60%; /* Set the video width to 90% of its container */
+        max-height: 50vh; /* Limit the maximum height of the video */
+    }
+    h1{font-size: 30px;}
+    h2{font-size: 25px;}
+    h3{font-size: 23px;
+        max-width: 700px;}
+    p{font-size: 20px;
+    max-width: 700px;}
+    li{font-size: 25px;}
+
+    /* CSS to make form text and fields bigger */
+    form {
+        font-size: 25px; /* Adjust the font size of the form */
+    }
+
+    label {
+        font-size: 25px; /* Adjust the font size of labels */
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="submit"] {
+        font-size: 20px; /* Adjust the font size of input fields */
+        padding: 1vw; /* Add padding to input fields */
+        border-radius: 5px; /* Adjust the border radius */
+    }
+
+    /* Adjust the size of submit button */
+    input[type="submit"] {
+        padding: 1vw 2vw; /* Adjust the padding of the submit button */
+        font-size: 20px; /* Adjust the font size of the submit button */
+    }
+
+
+    button {
+        font-size: 5vw; /* Increase font size for mobile */
+        padding: 3vw 4vw; /* Increase padding for mobile */
+    }
+}
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Highlights</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+
+</head>
+<body>
+    <a href="{{ url_for('index') }}"><button>Home</button></a>
+    <a href="{{url_for('search_makes') }}"><button>New Player Search</button></a>
+
+    
+    {% if highlights %}
+        <h1> Highlights for "{{players}}"</h1>
+        {% if start_date == end_date %}
+            <h1>{{ start_date }}</h1>
+        {% else %}
+            <h1>{{ start_date }} to {{ end_date }}</h1>
+        {% endif %}
+        <ul>
+            {% for video in highlights %}
+            <p>{{ video[1] }}</p>
+        </div>
+        <div class="video-container">
+            <video controls>
+                <source src="{{ video[0] }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>{{date}}</h1>
+        <p>This team had no highlights on this date</p>
+    {% endif %}
+
+    
+</body>
+</html>

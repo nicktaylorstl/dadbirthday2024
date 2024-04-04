@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wemby Blocks</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <h1>Random Wembanyama Block</h1>
+    {% for video in video_info %}
+    
+    <div class="description">
+        <p>{{ video[1] }}</p>
+    </div>
+    <div class="video-container">
+        <video controls>
+            <source src="{{ video[0] }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Rod's Highlights</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <h1>Hot Rod's Highlights</h1>
+    <h2>How would you like to search the highlights?</h2>
+    <ul>
+        <h2></h2>
+        <h2><a href="{{ url_for('search_makes',date=date) }}">Search all shots made</a></h2>
+        <h2><a href="{{ url_for('search_dunks',date=date) }}">Search all dunks</a></h2>
+        <h2><a href="{{ url_for('search_threes',date=date) }}">Search all threes</a></h2>
+        <h2><a href="{{ url_for('search_oops',date=date) }}">Search all alley-oops </a></h2>
+        <h2><a href="{{ url_for('search_assists',date=date) }}">Search all assists</a></h2>
+        <h2><a href="{{ url_for('search_blocks',date=date) }}">Search all blocks</a></h2>
+        <h2><a href="{{ url_for('search_steals',date=date) }}">Search all steals</a></h2>
+        
+    </ul>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLB Highlights</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <a href="{{ url_for('index') }}"><button>Home</button></a>
+    <h1>Welcome to Cool WHIP Highlights</h1>
+    <h2>Search for keywords to view highlights</h2>
+    <p>Enter as many keywords as you like, separated by commas</p>
+    <p>For example: dive, diving</p>
+    
+
+    <form action="{{ url_for('return_keyword', start_date=start_date, end_date=end_date) }}" method="GET">
+        <label for="keywords">Enter keywords:</label>
+        <input type="text" id="keywords" name="keywords">
+        <br>
+        <br>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+        <br>
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <p>If you don't select a date range it will default to yesterday</p>
+    
+
+</body>
+</html>

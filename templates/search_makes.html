@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Rod's Highlights</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <a href="{{ url_for('index') }}"><button>Home</button></a>
+    <h1>Welcome to Hot Rod's Highlights</h1>
+    <h2>Search for players to view highlights</h2>
+    <p>Enter as many players as you like, separated by commas</p>
+    <p>you can use first name, last name, or both</p>
+    <p>you can type 'heat' to get all clips for Miami</p>
+    <p>or type 'all' to get all clips for both teams</p>
+    
+
+    <form action="{{ url_for('return_makes', start_date=start_date, end_date=end_date) }}" method="GET">
+        <label for="players">Enter players:</label>
+        <input type="text" id="players" name="players">
+        <br>
+        <br>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+        <br>
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <p>If you don't select a date range it will default to yesterday</p>
+    
+
+</body>
+</html>

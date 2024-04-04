@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Highlights</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+
+</head>
+<body>
+    <a href="{{ url_for('index') }}"><button>Home</button></a>
+    <a href="{{url_for('search_keyword') }}"><button>New Keyword Search</button></a>
+
+    
+    {% if highlights %}
+        <h1> Highlights for "{{keywords}}"</h1>
+        {% if start_date == end_date %}
+            <h1>{{ start_date }}</h1>
+        {% else %}
+            <h1>{{ start_date }} to {{ end_date }}</h1>
+        {% endif %}
+        <ul>
+            {% for highlight in highlights %}
+                {% if highlight[0] is not none %}
+                    {% if highlight[5] is not none %}
+                        <h2>{{ highlight[0] }} - {{ highlight[5] }}</h2> <!-- Player Name -->
+                    {% else %}
+                        <h2>{{ highlight[0] }} - Free Agent</h2> <!-- Player Name -->
+                    {% endif %}    
+                {% endif %}
+            <h2>{{highlight[1]}}</h2>    
+            <h3>{{ highlight[2] }}</h3><br> <!-- Headline -->
+            <p>{{ highlight[3] }}</p><br> <!-- Description -->
+            <br>
+            <video controls>
+                <source src="{{ highlight[4] }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video><br> <!-- Embedded Video -->
+            <br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>{{date}}</h1>
+        <p>This team had no highlights on this date</p>
+    {% endif %}
+
+    
+</body>
+</html>
