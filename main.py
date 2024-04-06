@@ -84,18 +84,20 @@ def return_makes():
     for p in players_list:
         p = p.strip()
         cursor.execute(f"""
-                        SELECT game_id,eventnum
-                        FROM heat_pbp
+                        SELECT u.url, u.desc
+                        FROM heat_pbp as h
+                        LEFT JOIN urls as u on h.pk = u.pk
                         Where eventmsgtype = 1 
-                       and player1_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}' and player1_team_id in {team_ids}
+                        and player1_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}' and player1_team_id in {team_ids}
+                        
+                        
                         ORDER BY player1_name, date desc
                         """
                         )
         
         plays = cursor.fetchall()
         for i in plays:
-            print(f'LOOK HERE!!  {i[0]},{i[1]}')
-            highlights.append(get_highlight_url(f'00{i[0]}',str(i[1])))
+            highlights.append((i[0],i[1]))
             
     # Close the database connection
     conn.close()
@@ -140,8 +142,9 @@ def return_dunks():
     for p in players_list:
         p = p.strip()
         cursor.execute(f"""
-                        SELECT game_id,eventnum
-                        FROM heat_pbp
+                        SELECT u.url, u.desc
+                        FROM heat_pbp as h
+                        LEFT JOIN urls as u on h.pk = u.pk
                         Where eventmsgtype = 1 
                        and player1_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}' and player1_team_id in {team_ids} 
                        and (HOMEDESCRIPTION LIKE '%dunk%' or VISITORDESCRIPTION LIKE '%dunk%')
@@ -151,7 +154,7 @@ def return_dunks():
         
         plays = cursor.fetchall()
         for i in plays:
-            highlights.append(get_highlight_url(f'00{i[0]}',str(i[1])))
+            highlights.append((i[0],i[1]))
             
     # Close the database connection
     conn.close()
@@ -195,8 +198,9 @@ def return_threes():
     for p in players_list:
         p = p.strip()
         cursor.execute(f"""
-                        SELECT game_id,eventnum
-                        FROM heat_pbp
+                        SELECT u.url, u.desc
+                        FROM heat_pbp as h
+                        LEFT JOIN urls as u on h.pk = u.pk
                         Where eventmsgtype = 1 
                        and player1_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}' and player1_team_id in {team_ids}
                            and (HOMEDESCRIPTION LIKE '%3PT%' or VISITORDESCRIPTION LIKE '%3PT%')
@@ -206,7 +210,7 @@ def return_threes():
         
         plays = cursor.fetchall()
         for i in plays:
-            highlights.append(get_highlight_url(f'00{i[0]}',str(i[1])))
+            highlights.append((i[0],i[1]))
             
     # Close the database connection
     conn.close()
@@ -250,8 +254,9 @@ def return_oops():
     for p in players_list:
         p = p.strip()
         cursor.execute(f"""
-                        SELECT game_id,eventnum
-                        FROM heat_pbp
+                        SELECT u.url, u.desc
+                        FROM heat_pbp as h
+                        LEFT JOIN urls as u on h.pk = u.pk
                         Where eventmsgtype = 1 
                        and (player1_name LIKE '%{p}%' or player2_name LIKE '%{p}%') and date >= '{start_date}' and date <='{end_date}' and player1_team_id in {team_ids}
                         and (HOMEDESCRIPTION LIKE '%alley oop%' or VISITORDESCRIPTION LIKE '%alley oop%')
@@ -261,7 +266,7 @@ def return_oops():
         
         plays = cursor.fetchall()
         for i in plays:
-            highlights.append(get_highlight_url(f'00{i[0]}',str(i[1])))
+            highlights.append((i[0],i[1]))
             
     # Close the database connection
     conn.close()
@@ -305,8 +310,9 @@ def return_assists():
     for p in players_list:
         p = p.strip()
         cursor.execute(f"""
-                        SELECT game_id,eventnum
-                        FROM heat_pbp
+                        SELECT u.url, u.desc
+                        FROM heat_pbp as h
+                        LEFT JOIN urls as u on h.pk = u.pk
                         Where eventmsgtype = 1 
                        and player2_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}' and player1_team_id in {team_ids}
                         and (HOMEDESCRIPTION LIKE '%AST%' or VISITORDESCRIPTION LIKE '%AST%')
@@ -316,7 +322,7 @@ def return_assists():
         
         plays = cursor.fetchall()
         for i in plays:
-            highlights.append(get_highlight_url(f'00{i[0]}',str(i[1])))
+            highlights.append((i[0],i[1]))
             
     # Close the database connection
     conn.close()
@@ -360,8 +366,9 @@ def return_blocks():
     for p in players_list:
         p = p.strip()
         cursor.execute(f"""
-                        SELECT game_id,eventnum
-                        FROM heat_pbp
+                        SELECT u.url, u.desc
+                        FROM heat_pbp as h
+                        LEFT JOIN urls as u on h.pk = u.pk
                         Where eventmsgtype = 2 
                        and player3_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}' and player3_team_id in {team_ids}
                         and (HOMEDESCRIPTION LIKE '%BLOCK%' or VISITORDESCRIPTION LIKE '%BLOCK%')
@@ -371,7 +378,7 @@ def return_blocks():
         
         plays = cursor.fetchall()
         for i in plays:
-            highlights.append(get_highlight_url(f'00{i[0]}',str(i[1])))
+            highlights.append((i[0],i[1]))
             
     # Close the database connection
     conn.close()
@@ -415,8 +422,9 @@ def return_steals():
     for p in players_list:
         p = p.strip()
         cursor.execute(f"""
-                        SELECT game_id,eventnum
-                        FROM heat_pbp
+                        SELECT u.url, u.desc
+                        FROM heat_pbp as h
+                        LEFT JOIN urls as u on h.pk = u.pk
                         Where eventmsgtype = 5 
                        and player2_name LIKE '%{p}%' and date >= '{start_date}' and date <='{end_date}' and player2_team_id in {team_ids}
                        and (HOMEDESCRIPTION LIKE '%STEAL%' or VISITORDESCRIPTION LIKE '%STEAL%')
@@ -426,7 +434,7 @@ def return_steals():
         
         plays = cursor.fetchall()
         for i in plays:
-            highlights.append(get_highlight_url(f'00{i[0]}',str(i[1])))
+            highlights.append((i[0],i[1]))
             
     # Close the database connection
     conn.close()

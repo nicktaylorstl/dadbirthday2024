@@ -8,11 +8,13 @@ def update_sqlite():
     game_info_df = pd.read_csv(r'D:\Documents\GFA\SportsPython\Basketball\dadbirthday2024\data\heat_game_info_2023.csv')
     play_by_play_df = pd.read_csv(r'D:\Documents\GFA\SportsPython\Basketball\dadbirthday2024\data\heat_play_by_play_2023.csv')
     teams_df = pd.read_csv(r'D:\Documents\GFA\SportsPython\Basketball\dadbirthday2024\data\team_ids.csv')
+    urls_df = pd.read_csv(r'D:\Documents\GFA\SportsPython\Basketball\dadbirthday2024\data\heat_urls.csv')
 
     conn = sqlite3.connect(database_filepath)
     game_info_df.to_sql(f'game_info', conn, if_exists='replace')
     play_by_play_df.to_sql(f'play_by_play', conn, if_exists='replace')
     teams_df.to_sql(f'teams', conn, if_exists='replace')
+    urls_df.to_sql(f'urls',conn,if_exists='replace')
     conn.close()
     print(f"{database_filepath} was updated")
 
@@ -31,7 +33,8 @@ def update_final_table():
                     left join teams as ta on s.visitor_id = ta.team_id
                     """)
     data = res.fetchall()
-    data = [row[1:]for row in data]
+    data = [(f"{row[1]}{row[2]}", *row[1:]) for row in data]
+
     print(f'DATA TYPE IS {type(data[0][1])}')
 
 
@@ -41,6 +44,7 @@ def update_final_table():
     cur.execute(f"DROP TABLE IF EXISTS heat_pbp")
     cur.execute(f"""
                 CREATE TABLE IF NOT EXISTS heat_pbp (
+                pk STRING,
                 game_id STRING,
                 eventnum INTEGER,
                 eventmsgtype INTEGER,
@@ -83,7 +87,7 @@ def update_final_table():
             )
     """)
 
-    cur.executemany(f"INSERT INTO heat_pbp VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",data)
+    cur.executemany(f"INSERT INTO heat_pbp VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",data)
     print(f"heat_pbp was updated")
     conn.commit()
     conn.close()
